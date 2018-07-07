@@ -5,7 +5,7 @@
  */
 package gui;
 
-import DijkstraGraph.Dijkstra;
+import Graph.Dijkstra;
 import Storage.DBHasDataException;
 import Storage.Database;
 import basics.Connection;

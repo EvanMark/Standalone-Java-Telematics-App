@@ -31,11 +31,11 @@ public class Database {
     //this method creates the actual connection with the database with encrypted the user name and the password
     public static void connect() {
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String url = "jdbc:oracle:thin:@//oracle12c.hua.gr:1521/orcl";//using oracle database 
+        String url = "jdbc:mysql://localhost:3306/go_swiss";//using oracle database 
         Encryption.setCredentials("Login.encrypted");//takes the credentials from a encrypted file and pass it to two strings
         String pass = Encryption.getPassword();
         String user = Encryption.getUsername();
@@ -122,7 +122,7 @@ public class Database {
     public static HashMap<String, Location> readSpecCityFromDB(String cityName) {
         HashMap<String, Location> all = new HashMap();//creates a HashMap and puts all data there
         try (Statement st = conn.createStatement()) {
-            String sql = "SELECT * FROM JLOCATION WHERE KEY = '" + cityName + "'";
+            String sql = "SELECT * FROM JLOCATION WHERE JKEY = '" + cityName + "'";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {//stores the data as Location objects 
                 Location loc = new Location(rs.getString(2), rs.getInt(3), rs.getString(4), rs.getDouble(5), rs.getDouble(6));

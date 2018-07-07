@@ -1,7 +1,7 @@
 package basics;
 
 
-import DijkstraGraph.Dijkstra;
+import Graph.Dijkstra;
 import Storage.DBHasDataException;
 import Storage.Database;
 import Storage.FileUtilities;
