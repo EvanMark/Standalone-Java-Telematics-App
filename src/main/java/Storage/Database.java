@@ -50,7 +50,7 @@ public class Database {
     public static void disconnect() {
         try {
             if (conn != null && !conn.isClosed()) {
-                conn.commit();
+                //conn.commit();
                 conn.close();
             }
         } catch (SQLException ex) {

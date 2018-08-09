@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 public class GoSwiss extends javax.swing.JFrame {
-
+    
     private HashMap<String, Location> locmap = new HashMap<>();
     private HashMap<String, Connection> conmap = new HashMap<>();
     private static String SearchResult;
@@ -541,7 +541,7 @@ public class GoSwiss extends javax.swing.JFrame {
     private void LocationsBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocationsBoxActionPerformed
         if (Storage.Database.isConnected()) {
             locmap = Storage.Database.readSpecCityFromDB(LocationsBox.getSelectedItem().toString());
-        }  
+        }
     }//GEN-LAST:event_LocationsBoxActionPerformed
 
     private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
@@ -568,7 +568,7 @@ public class GoSwiss extends javax.swing.JFrame {
                 System.out.println("Database created with success!!");
                 System.out.println();
             } catch (DBHasDataException ex) {
-
+                
                 Database.DBError("DELETE FROM JLOCATION");
                 try {
                     Database.writeCitiesToDB(Location.CreateLocationsMap(new HashMap()));
@@ -581,7 +581,7 @@ public class GoSwiss extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateLocActionPerformed
 
     private void SearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SearchFieldFocusGained
-       
+        
         SearchField.setText("");
         SearchField.setForeground(Color.black);
     }//GEN-LAST:event_SearchFieldFocusGained
@@ -600,7 +600,7 @@ public class GoSwiss extends javax.swing.JFrame {
     }//GEN-LAST:event_LocationsMouseClicked
 
     private void ConFromBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConFromBoxActionPerformed
-       
+        
         from = ConFromBox.getSelectedItem().toString();
     }//GEN-LAST:event_ConFromBoxActionPerformed
 
@@ -622,38 +622,50 @@ public class GoSwiss extends javax.swing.JFrame {
         if (Storage.Database.isConnected()) {
             locmap = Storage.Database.readSpecCityFromDB(from);
         }
-        TextDetailsArea1.setText("Station: " + locmap.get(from).getName() + "\n"
-                + "ID: " + locmap.get(from).getid() + "\n"
-                + "Coordinates: X: " + locmap.get(from).getCoordsX() + "\n"
-                + "Y: " + locmap.get(from).getCoordsY());
+        try {
+            TextDetailsArea1.setText("Station: " + locmap.get(from).getName() + "\n"
+                    + "ID: " + locmap.get(from).getid() + "\n"
+                    + "Coordinates: X: " + locmap.get(from).getCoordsX() + "\n"
+                    + "Y: " + locmap.get(from).getCoordsY());
+        } catch (NullPointerException ex) {
+            TextDetailsArea1.setText("There is no station available\ncurrently in this city");
+        }
         if (Storage.Database.isConnected()) {
             locmap = Storage.Database.readSpecCityFromDB(to);
         }
-        TextDetailsArea2.setText("Station: " + locmap.get(to).getName() + "\n"
-                + "ID: " + locmap.get(to).getid() + "\n"
-                + "Coordinates: X: " + locmap.get(to).getCoordsX() + "\n"
-                + "Y: " + locmap.get(to).getCoordsY());
+        try {
+            TextDetailsArea2.setText("Station: " + locmap.get(to).getName() + "\n"
+                    + "ID: " + locmap.get(to).getid() + "\n"
+                    + "Coordinates: X: " + locmap.get(to).getCoordsX() + "\n"
+                    + "Y: " + locmap.get(to).getCoordsY());
+        } catch (NullPointerException ex) {
+            TextDetailsArea2.setText("There is no station available\ncurrently in this city");
+        }
     }//GEN-LAST:event_ConInfoButtonActionPerformed
 
     private void SearchConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchConActionPerformed
         Location locfrom;
         Location locto;
-        if (Storage.Database.isConnected()) {
-            locfrom = Storage.Database.readSpecCityFromDB(from).get(from);
-            locto = Storage.Database.readSpecCityFromDB(to).get(to);
-        } else {
-            locfrom = locmap.get(from);
-            locto = locmap.get(to);
-        }
-        if (conmap.get(from + ":" + to) != null) {
-            ConnectionsDetails.setText(conmap.get(from + ":" + to).getFrom().getStation().getName() + "-->"
-                    + conmap.get(from + ":" + to).getTo().getStation().getName());
-        } else if (locfrom.getid() != 0 && locto.getid() != 0 && locfrom.getid() != locto.getid()) {
-            Dijkstra d = new Dijkstra(conmap, locfrom.getName(),
-                    locto.getName());
-            ConnectionsDetails.setText(d.getPath().replaceAll(",", "-->").replaceAll("\\[", "").replaceAll("]", ""));
-        } else {
-            ConnectionsDetails.setText("There is not such information for this travel yet");
+        try {
+            if (Storage.Database.isConnected()) {
+                locfrom = Storage.Database.readSpecCityFromDB(from).get(from);
+                locto = Storage.Database.readSpecCityFromDB(to).get(to);
+            } else {
+                locfrom = locmap.get(from);
+                locto = locmap.get(to);
+            }
+            if (conmap.get(from + ":" + to) != null) {
+                ConnectionsDetails.setText(conmap.get(from + ":" + to).getFrom().getStation().getName() + "-->"
+                        + conmap.get(from + ":" + to).getTo().getStation().getName());
+            } else if (locfrom.getid() != 0 && locto.getid() != 0 && locfrom.getid() != locto.getid()) {
+                Dijkstra d = new Dijkstra(conmap, locfrom.getName(),
+                        locto.getName());
+                ConnectionsDetails.setText(d.getPath().replaceAll(",", "-->").replaceAll("\\[", "").replaceAll("]", ""));
+            } else {
+                ConnectionsDetails.setText("There is not such information for this travel yet");
+            }
+        } catch (NullPointerException ex) {
+            ConnectionsDetails.setText("No travel information. At least one city does not have a station at the moment.");
         }
         if (!ConnectionsDetails.getText().equals("No Results available yet")) {
             ConInfoButton.setVisible(true);
@@ -749,14 +761,18 @@ public class GoSwiss extends javax.swing.JFrame {
     }//GEN-LAST:event_LocationsButtonActionPerformed
 
     private void LocationsBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_LocationsBoxItemStateChanged
-         LocationDetails.setText("No Results available yet");
+        LocationDetails.setText("No Results available yet");
     }//GEN-LAST:event_LocationsBoxItemStateChanged
 
     private void SearchLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchLocButtonActionPerformed
-        LocationDetails.setText("<html>" + "Station: " + locmap.get(LocationsBox.getSelectedItem().toString()).getName() + "<br>"
-                + "ID: " + locmap.get(LocationsBox.getSelectedItem().toString()).getid() + "<br>"
-                + "Coordinates:<br>X: " + locmap.get(LocationsBox.getSelectedItem().toString()).getCoordsX() + "<br>"
-                + "Y: " + locmap.get(LocationsBox.getSelectedItem().toString()).getCoordsY() + "</html>");
+        try {
+            LocationDetails.setText("<html>" + "Station: " + locmap.get(LocationsBox.getSelectedItem().toString()).getName() + "<br>"
+                    + "ID: " + locmap.get(LocationsBox.getSelectedItem().toString()).getid() + "<br>"
+                    + "Coordinates:<br>X: " + locmap.get(LocationsBox.getSelectedItem().toString()).getCoordsX() + "<br>"
+                    + "Y: " + locmap.get(LocationsBox.getSelectedItem().toString()).getCoordsY() + "</html>");
+        } catch (NullPointerException ex) {
+            LocationDetails.setText("<html>" + "There is no station available" + "<br>" + "currently in this city" + "</html>");
+        }
     }//GEN-LAST:event_SearchLocButtonActionPerformed
 
     /**
@@ -773,7 +789,7 @@ public class GoSwiss extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {

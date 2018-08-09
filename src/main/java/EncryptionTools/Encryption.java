@@ -24,7 +24,7 @@ public class Encryption {
 
         FileInputStream F_input = null;
         try{
-            String key = "The key->freedom";//the key is custom-made, the only limitation is that is has to be 16 bytes
+            String key = "ZJv\\ZuE:q3sMJd\\r";//the key is custom-made, the only limitation is that is has to be 16 bytes
             File inputFile = new File(filename);//creates a new reference to the file
             File unlock = new File("Login.dat");//creates a new empty file
             CryptoUtils.decrypt(key, inputFile, unlock);//where with the assist of decrypt method ,the login info is decrypted and stored into that the file
