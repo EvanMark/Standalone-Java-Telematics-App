@@ -43,17 +43,18 @@ public class App {
                     Location.PrintLocationsHashMap(locmap);
                     break;
                 case 3:
-                    locmap = new HashMap();
-                    Database.connect();
-                    try {
-                        Database.writeCitiesToDB(Location.CreateLocationsMap(locmap));
-                        System.out.println("Database created with success!!");
-                        System.out.println();
-                    } catch (DBHasDataException ex) {
-                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-                        Database.DBError("DELETE FROM JLOCATION");
-                    }
-                    Database.disconnect();
+//                    locmap = new HashMap();
+//                    Database.connect();
+//                    try {
+//                        Database.writeCitiesToDB(Location.CreateLocationsMap(locmap));
+//                        System.out.println("Database created with success!!");
+//                        System.out.println();
+//                    } catch (DBHasDataException ex) {
+//                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+//                        Database.DBError("DELETE FROM JLOCATION");
+//                    }
+//                    Database.disconnect();
+                    System.out.println("Deprecated, please use option 4");
                     break;
                 case 4:
                     input = new Scanner(System.in);

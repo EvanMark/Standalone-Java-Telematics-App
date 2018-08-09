@@ -57,11 +57,9 @@ public class Location implements Serializable {
         ArrayList<String> cities = Tools.GetCityNameList("https://en.wikipedia.org/wiki/List_of_cities_in_Switzerland");
         List<LocationsThread> threads = new ArrayList<>();
         ExecutorService executor = Executors.newFixedThreadPool(50);
-        System.out.println("HERE");
         for (int i = 0; i < cities.size(); i++) {
             //for loop for each city
             LocationsThread city = new LocationsThread(cities.get(i));
-            System.out.println("HERE AGAIN");
             executor.execute(city);
             threads.add(city);
         }
