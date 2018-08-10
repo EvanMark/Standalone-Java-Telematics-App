@@ -4,6 +4,7 @@
 This standalone app is based on a Swiss Transportation API and it calculates transportation schedules with Dijkstra implementation, finds the best available route. The application is written in Java and MySQL. 
 For a more detailed informational guide about the Swiss Transportation API, please do check the following link https://transport.opendata.ch/docs.html 
 The application has both a UI and a terminal build.
+
 ---
 
 ## Getting Started
