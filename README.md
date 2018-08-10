@@ -30,7 +30,7 @@ Step 1
 ```
 clone project from github using the following command
 ```
-`<addr> git clone https://github.com/HUADevs/Standalone-Java-Telematics-App.git`
+`git clone https://github.com/HUADevs/Standalone-Java-Telematics-App.git`
 
 
 Step 2
