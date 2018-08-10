@@ -15,10 +15,8 @@ What things you need to install the software and how to install them
 
 ```
 Java Version 1.6 or higher - More info follow https://java.com/en/download/manual.jsp
-Netbeans IDE is used to code the application and it's the recommended choice 
-alongside with Eclipse - https://netbeans.org/downloads/ 
-JDBC Connector - Download the appropriate JAR file depending the Database. 
-In this case from MySQL use this, https://dev.mysql.com/downloads/connector/j/
+Netbeans IDE is used to code the application and it's the recommended choice alongside with Eclipse - https://netbeans.org/downloads/ 
+JDBC Connector - Download the appropriate JAR file depending the Database. In this case from MySQL use this, https://dev.mysql.com/downloads/connector/j/
 MySQL Database - Set a database server and create the a "go_swiss" schema with the SQL code provided in Github
 
 ```
@@ -31,9 +29,9 @@ Step 1
 
 ```
 clone project from github using the following command
-
-<addr> git clone https://github.com/HUADevs/Standalone-Java-Telematics-App.git
 ```
+'<addr> git clone https://github.com/HUADevs/Standalone-Java-Telematics-App.git'
+
 
 Step 2
 
