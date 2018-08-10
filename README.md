@@ -53,11 +53,11 @@ End with an example of getting some data out of the system or using it for a lit
 ## Running the tests
 
 Main Page:
-(https://github.com/HUADevs/Standalone-Java-Telematics-App/blob/master/go_swiss.png)
+!(https://github.com/HUADevs/Standalone-Java-Telematics-App/blob/master/go_swiss.png)
 Location Option:
-(https://github.com/HUADevs/Standalone-Java-Telematics-App/blob/master/goSwiss1.png)
+!(https://github.com/HUADevs/Standalone-Java-Telematics-App/blob/master/goSwiss1.png)
 Connection Option:
-(https://github.com/HUADevs/Standalone-Java-Telematics-App/blob/master/goswiss3.png)
+!(https://github.com/HUADevs/Standalone-Java-Telematics-App/blob/master/goswiss3.png)
 
 ## Deployment
 
