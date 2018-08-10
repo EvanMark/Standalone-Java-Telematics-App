@@ -1,9 +1,11 @@
 # Standalone-Java-Telematics-App
+---
 
 This standalone app is based on a Swiss Transportation API and it calculates transportation schedules with Dijkstra implementation, finds the best available route. The application is written in Java and MySQL. 
 For a more detailed informational guide about the Swiss Transportation API, please do check the following link https://transport.opendata.ch/docs.html 
 The application has both a UI and a terminal build.
 
+---
 
 ## Getting Started
 
@@ -29,9 +31,9 @@ Step 1
 
 ```
 clone project from github using the following command
-
-`<addr> git clone https://github.com/HUADevs/Standalone-Java-Telematics-App.git`
 ```
+`git clone https://github.com/HUADevs/Standalone-Java-Telematics-App.git`
+
 
 Step 2
 
@@ -42,7 +44,8 @@ Open project with IDE and perform changes in the database credentials in case yo
 Step 3 (Case of changing DB credentials)
 
 ```
-Need to change the encryption file Login.encrypted to accommodate your own. Use the encrypt method to achieve that. 
+Need to change the encryption file Login.encrypted to accommodate your own. 
+Use the encrypt method to achieve that. 
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
